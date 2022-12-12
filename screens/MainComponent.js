@@ -5,6 +5,8 @@ import DirectoryScreen from "./DirectoryScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
+import AboutScreen from './AboutScreen';
+import ContactScreen from './ContactScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +52,38 @@ const DirectoryNavigator = () => {
     )
 }
 
+const AboutNavigator = () => {
+    const Stack = createStackNavigator();
+
+    return(
+        <Stack.Navigator
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen 
+                name='About Us'
+                component={AboutScreen}
+                options={{title: 'About Us'}}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const ContactNavigator = () => {
+    const Stack = createStackNavigator();
+
+    return(
+        <Stack.Navigator
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen 
+                name='Contact Us'
+                component={ContactScreen}
+                options={{title: 'Contact Us'}}
+            />
+        </Stack.Navigator>
+    )
+}
+
 const Main = () => {
     return (
         <View style={{flex: 1, paddingtop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight}}>
@@ -66,6 +100,16 @@ const Main = () => {
                     name='Directory'
                     component={DirectoryNavigator}
                     options={{title: 'Directory'}}
+                />
+                <Drawer.Screen 
+                    name='About Us'
+                    component={AboutNavigator}
+                    options={{title: 'About Us'}}
+                />
+                <Drawer.Screen 
+                    name='Contact Us'
+                    component={ContactNavigator}
+                    options={{title: 'Contact Us'}}
                 />
            </Drawer.Navigator>
         </View>
