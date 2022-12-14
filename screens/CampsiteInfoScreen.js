@@ -7,6 +7,7 @@ const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
 
     const [comments, setComments ] = useState(COMMENTS);
+    const [favorites, setFavorites ] = useState(false);
 
     const renderCommentItem = ({ item }) => {
         return (
@@ -31,7 +32,11 @@ const CampsiteInfoScreen = ({ route }) => {
                 }}
                 ListHeaderComponent={
                     <>
-                        <RenderCampsite campsite={campsite} />
+                        <RenderCampsite 
+                            campsite={campsite} 
+                            isFavorite={favorites}
+                            markFavorite={() => setFavorites(true)}
+                        />
                         <Text style={styles.commentsTitle}>Comments</Text>
                     </>
                 }
