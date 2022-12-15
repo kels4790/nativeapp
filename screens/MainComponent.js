@@ -137,22 +137,62 @@ const Main = () => {
                 <Drawer.Screen 
                     name='Home'
                     component={HomeNavigator}
-                    options={{title: 'Home'}}
+                    options={{
+                        title: 'Home',
+                        drawerIcon:({color}) => (
+                            <Icon 
+                                name='home'
+                                type='font-awesome'
+                                iconStyle={{width: 24}}
+                                color={color}
+                            />
+                        ) 
+                    }}
                 />
                   <Drawer.Screen 
                     name='Directory'
                     component={DirectoryNavigator}
-                    options={{title: 'Directory'}}
+                    options={{
+                        title: 'Campsite Directory',
+                        drawerIcon:({color}) => (
+                            <Icon 
+                                name='list'
+                                type='font-awesome'
+                                iconStyle={{width: 24}}
+                                color={color}
+                            />
+                        ) 
+                    }}
                 />
                 <Drawer.Screen 
                     name='About Us'
                     component={AboutNavigator}
-                    options={{title: 'About Us'}}
+                    options={{
+                        title: 'About Us',
+                        drawerIcon:({color}) => (
+                            <Icon 
+                                name='info-circle'
+                                type='font-awesome'
+                                iconStyle={{width: 24}}
+                                color={color}
+                            />
+                        ) 
+                    }}
                 />
                 <Drawer.Screen 
                     name='Contact Us'
                     component={ContactNavigator}
-                    options={{title: 'Contact Us'}}
+                    options={{
+                        title: 'Contact Us',
+                        drawerIcon:({color}) => (
+                            <Icon 
+                                name='address-card'
+                                type='font-awesome'
+                                iconStyle={{width: 24}}
+                                color={color}
+                            />
+                        ) 
+                    }}
                 />
            </Drawer.Navigator>
         </View>
