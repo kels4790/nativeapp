@@ -31,7 +31,7 @@ const HomeNavigator = () => {
                          name='home'
                          type='font-awesome'
                          iconStyle={styles.stackIcon}
-                         onPress={() => navigation.toggleDrawer}
+                         onPress={() => navigation.toggleDrawer()}
                         />
 
                     
@@ -59,7 +59,7 @@ const DirectoryNavigator = () => {
                             name='list'
                             type='font-awesome'
                             iconStyle={styles.stackIcon}
-                            onPress={() => navigation.toggleDrawer}
+                            onPress={() => navigation.toggleDrawer()}
                         />
                     )
                 })}
@@ -92,7 +92,7 @@ const AboutNavigator = () => {
                             name='info-circle'
                             type='font-awesome'
                             iconStyle={styles.stackIcon}
-                            onPress={() => navigation.toggleDrawer}
+                            onPress={() => navigation.toggleDrawer()}
                         />
                     )
                 })}
@@ -118,7 +118,7 @@ const ContactNavigator = () => {
                             name='address-card'
                             type='font-awesome'
                             iconStyle={styles.stackIcon}
-                            onPress={() => navigation.toggleDrawer}
+                            onPress={() => navigation.toggleDrawer()}
                         />
                     )
                 })}
