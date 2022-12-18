@@ -4,7 +4,7 @@ import RenderCampsite from '../features/campsites/RenderCampsite';
 import {toggleFavorite} from '../features/favorites/favoritesSlice'; 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { Input, Rating } from 'react-native-elements';
-
+import { postComment } from '../features/comments/commentsSlice';
 const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
     const comments = useSelector((state) => state.comments);
@@ -23,7 +23,7 @@ const CampsiteInfoScreen = ({ route }) => {
             author: author,
             text: text,
         }
-        console.log(newComment);
+        dispatch(postComment(newComment));
         setShowModal(!showModal);
 
     }
