@@ -6,6 +6,8 @@ import Loading from '../components/LoadingComponent';
 import { baseUrl } from "../shared/baseUrl";
 import { toggleFavorite } from "../features/favorites/favoritesSlice";
 import { Alert } from "react-native";
+import * as Animatable from 'react-native-animatable';
+
 
 
 const FavoritesScreen = ({ navigation }) => {
@@ -15,7 +17,7 @@ const FavoritesScreen = ({ navigation }) => {
     );
     const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
-    
+
     const renderFavoriteItem = ({item: campsite}) => {
 
             return (
@@ -83,13 +85,15 @@ const FavoritesScreen = ({ navigation }) => {
     }
 
     return (
-        <FlatList 
-            data={campsitesArray.filter(
-                (campsite) => favorites.includes(campsite.id)
-            )}
-            renderItem={renderFavoriteItem}
-            keyExtractor={(item) => item.id.toString()}
-        />
+        <Animatable.View animation='fadeInRight' duration={2000}>
+            <FlatList 
+                data={campsitesArray.filter(
+                    (campsite) => favorites.includes(campsite.id)
+                )}
+                renderItem={renderFavoriteItem}
+                keyExtractor={(item) => item.id.toString()}
+            />
+        </Animatable.View>
     )
 
 }

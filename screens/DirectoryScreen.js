@@ -3,6 +3,8 @@ import { FlatList, Text, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import { CAMPSITES } from '../shared/campsites';
 import Loading from '../components/LoadingComponent';
+import * as Animatable from 'react-native-animatable';
+
 
 const DirectoryScreen = ({ navigation }) => {
     const [campsites, setCampsites] = useState(CAMPSITES);
@@ -20,6 +22,7 @@ const DirectoryScreen = ({ navigation }) => {
 
     const renderDirectoryItem = ({ item: campsite }) => {
         return (
+            <Animatable.View animation='fadeInRightBig' duration={2000}>
             <ListItem
                 onPress={() =>
                     navigation.navigate('CampsiteInfo', { campsite })
@@ -33,6 +36,7 @@ const DirectoryScreen = ({ navigation }) => {
                     </ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
+            </Animatable.View>
         );
     };
     return (

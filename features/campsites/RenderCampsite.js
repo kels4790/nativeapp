@@ -1,12 +1,59 @@
-import { StyleSheet, Text, View, Modal } from "react-native";
+import { useRef } from "react";
+import { StyleSheet, Text, View, PanResponder, Alert } from "react-native";
 import { Card, Icon } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
+
 
 const RenderCampsite = (props) => {
 
     const {campsite} = props;
-    
+    const isLeftSwipe = ({ dx }) => dx < -100;
+
+    const view = useRef();
+
+    const panResponder = PanResponder.create({
+        onStartShouldStartPanResponder: () => true, 
+        onPanResponderGrant: () => {
+            view.current
+                .rubberBand(1000)
+                .then((endState) => 
+                    console.log(endState.finished ? 'finished' : 'canceled'));
+        },
+        onPanResponderEnd: (e, gestureState) => {
+            console.log('pan responder end', gestureState);
+            if(isLeftSwipe(gestureState)) {
+                Alert.alert(
+                    'Add Favorite',
+                    'Add ' + campsite.name + ' to favorites?', 
+                    [
+                       {
+                        text: 'Cancel',
+                        style: 'cancel',
+                        onPress: () => console.log('Cancel Pressed')
+                       },
+                       {
+                        text: 'OK',
+                        onPress: () => props.isFavorite
+                        ? console.log('Already Favorited') 
+                        : props.markFavorite()
+                       } 
+                    ],
+                    { cancelable: false }
+                )
+            }
+        }
+    });
+
+
     if(campsite) {
         return (
+            <Animatable.View
+            animation='fadeInDownBig'
+            duration={2000}
+            delay={1000}
+            ref={view}
+            {...panResponder.panHandlers}
+        >
             <Card containerStyle={styles.cardContainer}>
                 <Card.Image source={campsite.image}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
@@ -38,6 +85,7 @@ const RenderCampsite = (props) => {
                         />
                     </View>
             </Card>
+            </Animatable.View>
         )
     }
     return <View />
