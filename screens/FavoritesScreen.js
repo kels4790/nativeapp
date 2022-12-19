@@ -15,6 +15,7 @@ const FavoritesScreen = ({ navigation }) => {
     );
     const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
+    
     const renderFavoriteItem = ({item: campsite}) => {
 
             return (
