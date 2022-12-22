@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Text, View, ScrollView, StyleSheet, Switch, Button, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import * as Animatable from 'react-native-animatable';
 
 const ReservationScreen = () => {
     const [campers, setCampers] = useState(1);
@@ -32,6 +33,10 @@ const ReservationScreen = () => {
 
     return (
         <ScrollView>
+            <Animatable.View
+                animation={'zoomIn'}
+                duration={2000}
+            >
             <View style={styles.formRow}>
                 <Text style={styles.formLabel}>Number of Campers:</Text>
                 <Picker
@@ -116,6 +121,7 @@ const ReservationScreen = () => {
                 </View>
 
             </Modal>
+            </Animatable.View>
         </ScrollView>
     );
 };
