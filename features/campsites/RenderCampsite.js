@@ -2,13 +2,14 @@ import { useRef } from "react";
 import { StyleSheet, Text, View, PanResponder, Alert } from "react-native";
 import { Card, Icon } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
-import { baseUrl } from "../../shared/baseUrl";
+
 
 
 const RenderCampsite = (props) => {
 
     const {campsite} = props;
     const isLeftSwipe = ({ dx }) => dx < -100;
+    const isRightSwipe = ({ dx }) => dx > 200;
 
     const view = useRef();
 
@@ -41,7 +42,23 @@ const RenderCampsite = (props) => {
                     ],
                     { cancelable: false }
                 )
-            }
+            } else if (isRightSwipe(gestureState)) {
+                Alert.alert(
+                    'Add Review',
+                    'Add ' + campsite.name + ' review?',
+                    [
+                        {
+                            text: 'Cancel',
+                            style: 'cancel',
+                            onPress: () => console.log('Cancel Review')
+                        },
+                        {
+                            text: 'OK',
+                            onPress: () => onShowModal()
+                        }
+                    ]
+                )
+            } // may be recreating this entire gesture portion
         }
     });
 
@@ -56,7 +73,7 @@ const RenderCampsite = (props) => {
             {...panResponder.panHandlers}
         >
             <Card containerStyle={styles.cardContainer}>
-                <Card.Image source={{uri: baseUrl + campsite.image}}>
+                <Card.Image source={campsite.image}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                        <Text 
                             style={styles.cardText}
