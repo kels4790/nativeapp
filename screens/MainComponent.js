@@ -34,7 +34,7 @@ const HomeNavigator = () => {
                 name='Home'
                 component={HomeScreen}
                 options={({ navigation }) => ({
-                    title: 'home', 
+                    title: 'Home', 
                     headerLeft: () => (
                         <Icon 
                          name='home'
@@ -269,7 +269,7 @@ const Main = () => {
                         title: 'Home',
                         drawerIcon:({color}) => (
                             <Icon 
-                                name='Home'
+                                name='home'
                                 type='font-awesome'
                                 iconStyle={{width: 24}}
                                 color={color}

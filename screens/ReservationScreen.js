@@ -3,6 +3,7 @@ import { Text, View, ScrollView, Switch, Button, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Animatable from 'react-native-animatable';
+import * as Notifications from 'expo-notifications';
 
 const ReservationScreen = () => {
     const [campers, setCampers] = useState(1);
@@ -32,6 +33,35 @@ const ReservationScreen = () => {
         console.log(hikeIn);
         console.log(date);
         console.log(showCalendar);
+    }
+
+    const presentLocalNotifcation = async (reservationDate) => {
+            const sendNotification = () => {
+                Notifications.setNotificationHandler({
+                    handleNotification: async () => ({
+                        shouldShowAlert: true, 
+                        shouldPlaySound: true, 
+                        shouldSetBadge: true
+                    })
+                });
+
+                Notifications.scheduleNotificationAsync({
+                    content: {
+                        title: 'Your Campsite Reservation Search',
+                        body: `Search Reservations for ${reservationDate}`
+                    },
+                    trigger: null
+                });
+            }
+
+            let permissions = await Notifications.getPermissionsAsync();
+            if(!permissions.granted) {
+                permissions = await Notifications.requestPermissionsAsync();
+            }
+            if (permissions.granted) {
+                sendNotification();
+            }
+
     }
 
     return (
@@ -89,7 +119,14 @@ const ReservationScreen = () => {
                      [
                             
                                 {
-                                    text: 'OK'
+                                    text: 'OK',
+                                    onPress: () => {
+                                        presentLocalNotifcation(
+                                            date.toLocaleDateString('en-US')
+                                            );
+                                        handleReservation();
+                                        resetForm();
+                                    }
                 
                                 },
                         
