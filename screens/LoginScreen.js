@@ -169,6 +169,22 @@ const RegisterTab = () => {
             }
     }
 
+    const getImageFromGallery = async () => {
+        const mediaLibraryPermissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if(mediaLibraryPermissions.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+               allowsEditing: true, 
+               aspect: [1, 1],
+               log: console.log(capturedImage)
+            });
+
+            if(!capturedImage.cancelled) {
+                console.log(capturedImage);
+                processImage(capturedImage.uri);
+            }
+        }
+    }
+
     const processImage = async (imgUri) => {
          const processedImage = 
                 await ImageManipulator.manipulateAsync(
@@ -203,6 +219,7 @@ const RegisterTab = () => {
                         style={styles.image}
                     />
                     <Button title='Camera' onPress={getImageFromCamera} />
+                    <Button title='Gallery' onPress={getImageFromGallery} />
 
                 </View>
                 <Input 
@@ -272,6 +289,7 @@ const RegisterTab = () => {
                         }
                         buttonStyle={{backgroundColor: '#5637DD'}}
                     />
+                
                 </View>
 
              
